@@ -51,3 +51,5 @@ variable "codebuild_image" {
 variable "codebuild_bucket" {
   default = "testtask-artifacts"
 }
+
+variable "codebuild_arn" {}
