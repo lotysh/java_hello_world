@@ -1,20 +1,2 @@
-  589  vf ansible.cfg 
-  590  vi ansible.cfg 
-  591  ansible -m ping all
-  592  ansible -m ping all
-  593  ansible -m ping "ec2_tag_Name": "Server-test"
-  594  ansible -m ping --tags 'Server-test'
-  595  ansible -m ping tag_Name_Server-test
-  596  vi test.yml
-  597  ansible-playbook test.yml 
-  598  ansible -m ping tag_Name_Server-test
-  599  ansible-playbook test.yml -e nodes='tag_Name_Server-test'
-  600  ansible -m ping tag_environmentNam_test
-  601  ansible -m ping tag_environmentName_test
-  602  vi test.yml
-  603  ansible-playbook test.yml
-  604  vi test.yml
-  605  ansible-playbook test.yml
-  606  vi test.yml
-  607  history 10
-  608  history 20 >> readme
+ansible -m ping tag_environmentName_test
+ansible-playbook test.yml
