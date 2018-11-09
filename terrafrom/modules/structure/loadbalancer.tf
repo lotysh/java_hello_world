@@ -52,3 +52,4 @@ resource "aws_security_group_rule" "allow_inbound" {
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = "${aws_security_group.elb.id}"
 }
+

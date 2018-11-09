@@ -52,4 +52,10 @@ variable "codebuild_bucket" {
   default = "testtask-artifacts"
 }
 
-variable "codebuild_arn" {}
+variable "codebuild_arn" {
+  default = ""
+}
+
+variable "vpc_cidr" {
+  type = "list"
+}

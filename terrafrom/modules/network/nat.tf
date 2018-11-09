@@ -1,13 +1,14 @@
 // NAT instances - DEPRECATED, used only for SSH tunneling for Terraform provisioning
 resource "aws_instance" "nat" {
   instance_type = "t2.micro"
-  count = 1
+  count = "${length(var.zones)}"
   availability_zone = "${element(var.zones, count.index)}"
   ami = "${var.nat_ami}"
   source_dest_check = false
   subnet_id = "${element(aws_subnet.public.*.id, count.index)}"
   associate_public_ip_address = true
-
+  key_name      = "hello-world-instances"
+  security_groups = ["${aws_security_group.default.id}"]
   lifecycle {
     ignore_changes = ["ami"]
   }

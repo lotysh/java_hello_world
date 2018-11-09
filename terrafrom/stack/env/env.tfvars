@@ -12,6 +12,3 @@ environment_id = "integration"
 environment_name = "integration"
 
 nat_ami = "ami-922914f7"
-
-codebuild_arn = "arn:aws:iam::440660074331:role/service-role/codebuild-Hello_world_war-service-role"
-

@@ -13,7 +13,7 @@ module "structure" {
 
   vpc_zone_identifier = ["${module.network.vpc_zone_identifier}"]
   vpc_id              = "${module.network.vpc_id}"
-
+  vpc_cidr            = ["${module.network.vpc_cidr}"]
   #   environment_name = "${var.environment_name}"
   #   region           = "${var.region}"
   #   vpc_cidr         = "${var.vpc_cidr}"

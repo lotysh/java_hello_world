@@ -28,7 +28,8 @@ resource "aws_launch_configuration" "launch_configuration" {
   name          = "${var.cluster_name}"
   image_id      = "${var.ami_id}"
   instance_type = "${var.instance_type}"
-
+  iam_instance_profile = "${aws_iam_instance_profile.test_profile.name}"
+  key_name      = "hello-world-instances"
   security_groups = ["${aws_security_group.autoscaling_security_group.id}"]
 }
 
@@ -60,4 +61,70 @@ resource "aws_security_group_rule" "allow_all_outbound_asg" {
   protocol          = "-1"
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = "${aws_security_group.autoscaling_security_group.id}"
+}
+
+resource "aws_security_group_rule" "allow_ssh_from_NAT" {
+  type              = "ingress"
+  from_port         = "22"
+  to_port           = "22"
+  protocol          = "tcp"
+  cidr_blocks       = ["${var.vpc_cidr}"]
+  security_group_id = "${aws_security_group.autoscaling_security_group.id}"
+}
+
+resource "aws_iam_role" "ec2_role_read_s3" {
+  name = "get_artifacts_from_s3"
+
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "sts:AssumeRole",
+      "Principal": {
+        "Service": "ec2.amazonaws.com"
+      },
+      "Effect": "Allow",
+      "Sid": ""
+    }
+  ]
+}
+EOF
+}
+
+resource "aws_iam_policy" "policy" {
+  name        = "test-policy"
+  description = "A test policy"
+  policy      =  <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": ["s3:ListBucket"],
+      "Resource": ["arn:aws:s3:::testtask-artifacts"]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:Get*",
+        "s3:List*"
+      ],
+      "Resource": ["arn:aws:s3:::testtask-artifacts/*"]
+    }
+  ]
+}
+EOF
+}
+
+
+resource "aws_iam_policy_attachment" "ec2_role_read_s3-attach" {
+  name       = "test-attachment"
+  roles      = ["${aws_iam_role.ec2_role_read_s3.name}"]
+  policy_arn = "${aws_iam_policy.policy.arn}"
+}
+
+resource "aws_iam_instance_profile" "test_profile" {
+  name  = "test_profile"
+  role = "${aws_iam_role.ec2_role_read_s3.name}"
 }
