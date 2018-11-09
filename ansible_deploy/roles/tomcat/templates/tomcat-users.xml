@@ -18,7 +18,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<tomcat-users>
+
 <!--
   NOTE:  By default, no user is included in the "manager-gui" role required
   to operate the "/manager/html" web application.  If you wish to use this app,
@@ -29,8 +29,18 @@
   and thus are ignored when reading this file. Do not forget to remove
   <!.. ..> that surrounds them.
 -->
-
+<!--
   <user username="{{ admin_username }}" password="{{ admin_password }}" roles="admin-gui,manager-gui" />
+-->
+<tomcat-users>
+  <role rolename="manager-script"/>
+  <role rolename="manager-gui"/>
+  <role rolename="manager-jmx"/>
+  <role rolename="manager-status"/>
+  <role rolename="admin-script"/>
+  <user username="{{ admin_username }}"  password="{{ admin_password }}" roles="manager-gui,admin-gui,admin-script"/>
+</tomcat-users>
+
 
 <!--
   <role rolename="tomcat"/>
@@ -39,5 +49,3 @@
   <user username="both" password="tomcat" roles="tomcat,role1"/>
   <user username="role1" password="tomcat" roles="role1"/>
 -->
-
-</tomcat-users>

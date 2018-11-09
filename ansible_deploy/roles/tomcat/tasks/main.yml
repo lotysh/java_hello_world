@@ -11,11 +11,11 @@
 #     - java-1.8.0-openjdk
 - name: add group "tomcat"
   group: name=tomcat
-# - name: add user "tomcat"
-#   user: name=tomcat group=tomcat home=/usr/share/tomcat createhome=no
-#   state: present
-#   become: True
-#   become_method: sudo
+- name: add user "tomcat"
+  user: name=tomcat group=tomcat home=/usr/share/tomcat createhome=no
+  state: present
+  become: True
+  become_method: sudo
 - name: Download Tomcat
   get_url: url=http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.61/bin/apache-tomcat-7.0.61.tar.gz dest=/opt/apache-tomcat-7.0.61.tar.gz
 - name: Extract archive
@@ -45,13 +45,13 @@
 - name: Configure Tomcat external access
   template: src=host-manager.xml dest=/usr/share/tomcat/conf/Catalina/localhost/
   notify: restart tomcat
-  # - name: Ensure boto and boto3 modules are installed
-  #   pip:
-  #     name: "{{ item }}"
-  #   with_items:
-  #    - boto3
-  #    - botocore
-#     delegate_to: "{{ ec2_instance_ip }}"
+- name: Ensure boto and boto3 modules are installed
+  pip:
+    name: "{{ item }}"
+  with_items:
+    - boto3
+    - botocore
+  #delegate_to: "{{ ec2_instance_ip }}"
 - name: Install Tomcat init script
   copy: src=tomcat-initscript.sh dest=/etc/init.d/tomcat mode=0755
 

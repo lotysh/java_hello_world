@@ -1,2 +1,3 @@
 terrafrom/stack/.terraform
+ansible_deploy/test.retry
 .gitignore
