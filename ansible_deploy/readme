@@ -1,2 +1,0 @@
-ansible -m ping tag_environmentName_test
-ansible-playbook test.yml
