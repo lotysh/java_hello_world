@@ -43,7 +43,7 @@ Host 10.170.*.*
   ForwardAgent yes
   StrictHostKeyChecking no
   IdentityFile /home/iloty/ansible/hello-world-instances.pem
-  ProxyCommand ssh -i /home/iloty/ansible/hello-world-instances.pem  -o StrictHostKeyChecking=no ec2-user@18.222.182.165 nc %h %p
+  ProxyCommand ssh -i /home/iloty/ansible/hello-world-instances.pem  -o StrictHostKeyChecking=no ec2-user@your_public_nat_ip nc %h %p
 ```
 And after that run:
 ```sh
