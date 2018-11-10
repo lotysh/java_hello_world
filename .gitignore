@@ -1,5 +1,5 @@
-terrafrom/*
-ansible_deploy/*
+terrafrom/
+ansible_deploy/
 terrafrom/stack/.terraform
 ansible_deploy/test.retry
 readme.md
