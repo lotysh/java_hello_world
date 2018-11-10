@@ -1,7 +1,5 @@
 # Hello world on AWS (Maven + Terraform + Ansible)
 
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
-
 Test project which realize :
 
   - AWS via Terraform (EC2, Autoscalling, Health check, Loadbalancing CodeBuild)
