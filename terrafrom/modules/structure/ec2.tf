@@ -5,7 +5,7 @@ resource "aws_autoscaling_group" "autoscaling_group" {
 
   # Use a fixed-size cluster
   min_size                  = "${var.cluster_size}"
-  max_size                  = "${var.cluster_size}"
+  max_size                  = "${var.max_cluster_size}"
   desired_capacity          = "${var.cluster_size}"
   health_check_type         = "${var.health_check_type}"
   health_check_grace_period = 15

@@ -33,12 +33,7 @@
   <user username="{{ admin_username }}" password="{{ admin_password }}" roles="admin-gui,manager-gui" />
 -->
 <tomcat-users>
-  <role rolename="manager-script"/>
-  <role rolename="manager-gui"/>
-  <role rolename="manager-jmx"/>
-  <role rolename="manager-status"/>
-  <role rolename="admin-script"/>
-  <user username="{{ admin_username }}"  password="{{ admin_password }}" roles="manager-gui,admin-gui,admin-script"/>
+  <user username="{{ admin_username }}"  password="{{ admin_password }}" roles="manager-gui"/>
 </tomcat-users>
 
 

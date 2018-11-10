@@ -96,6 +96,6 @@ resource "aws_codebuild_project" "codebuild" {
   artifacts {
     type           = "S3"
     location       = "testtask-artifacts"
-    namespace_type = "BUILD_ID"
+    namespace_type = "NONE"
   }
 }

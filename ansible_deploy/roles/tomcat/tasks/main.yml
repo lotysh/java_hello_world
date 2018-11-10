@@ -1,8 +1,10 @@
 ---
 - name: Update all packages to latest
   yum: name=* state=latest
-- name: Install Java 1.7
-  yum: name=java-1.7.0-openjdk state=present
+#- name: Install Java 1.7
+#  yum: name=java-1.7.0-openjdk state=present
+- name: Install Java 1.8
+  yum: name=java-1.8.0-openjdk state=present
 # - name: Install basic software
 #   yum:
 #     name: "{{ item }}"
@@ -34,24 +36,21 @@
 #     - tomcat8-admin-webapps
 - name: Change ownership of Tomcat installation
   file: path=/usr/share/tomcat/ owner=tomcat group=tomcat state=directory recurse=yes
-#- name: start tomcat
-#  shell: sudo service tomcat restart
 - name: Configure Tomcat server
   template: src=server.xml dest=/usr/share/tomcat/conf/
   notify: restart tomcat
 - name: Configure Tomcat users
   template: src=tomcat-users.xml dest=/usr/share/tomcat/conf/
   notify: restart tomcat
-- name: Configure Tomcat external access
-  template: src=host-manager.xml dest=/usr/share/tomcat/conf/Catalina/localhost/
-  notify: restart tomcat
+#- name: Configure Tomcat external access
+#  template: src=host-manager.xml dest=/usr/share/tomcat/conf/Catalina/localhost/
+#  notify: restart tomcat
 - name: Ensure boto and boto3 modules are installed
   pip:
     name: "{{ item }}"
   with_items:
     - boto3
     - botocore
-  #delegate_to: "{{ ec2_instance_ip }}"
 - name: Install Tomcat init script
   copy: src=tomcat-initscript.sh dest=/etc/init.d/tomcat mode=0755
 
@@ -63,6 +62,9 @@
     dest: "/usr/share/tomcat/webapps/sparkjava-hello-world-1.0.war"
     mode: get
     overwrite: yes
+- name: sleep for 10 seconds and continue with play
+  shell: sleep 10
+
 - name: Start Tomcat
   service: name=tomcat state=started enabled=yes
 - name: wait for tomcat to start

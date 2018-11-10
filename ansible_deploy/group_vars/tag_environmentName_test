@@ -1,7 +1,7 @@
 # This will configure a default manager-gui user:
 
 admin_username: admin
-admin_password: adminsecret12345
+admin_password: admin
 
 # Here are variables related to the Tomcat installation
 

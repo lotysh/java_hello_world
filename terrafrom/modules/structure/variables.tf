@@ -6,6 +6,10 @@ variable "cluster_size" {
   default = 3
 }
 
+variable "max_cluster_size" {
+  default = 3
+}
+
 variable "health_check_type" {
   default = "EC2"
 }
